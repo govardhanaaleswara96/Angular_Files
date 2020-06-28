@@ -1,0 +1,11 @@
+<h2>Users</h2>
+<ul>
+    <li *ngFor="let user of users">
+        <h4>{{user.firstName}} {{user.lastName}}</h4>
+        <ul>
+            <li>{{user.address.street}}</li>
+            <li>{{user.address.city}}</li>
+            <li>{{user.address.country}}</li>
+        </ul>
+    </li>
+</ul>
