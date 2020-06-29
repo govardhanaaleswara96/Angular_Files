@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -10,18 +10,14 @@ export class UsersComponent implements OnInit {
   user: User = {
     firstName: '',
     lastName: '',
-    age: null,
-    address: {
-      street: '',
-      city: '',
-      country: '',
-    },
+    email: '',
   };
   users: User[];
   showExtended: boolean = true;
   loaded: boolean = false;
   enableAdd: boolean = true;
   showForm: boolean = false;
+  @ViewChild('userForm') form: any;
   constructor() {}
 
   ngOnInit(): void {
@@ -31,12 +27,7 @@ export class UsersComponent implements OnInit {
         {
           firstName: 'Govardhan',
           lastName: 'Aaleswara',
-          age: 23,
-          address: {
-            street: '102 katchur main road',
-            city: 'Chennai',
-            country: 'India',
-          },
+          email: 'Goabala88@gmail.com',
           isActive: true,
           register: new Date('03/11/2020 06:20:00'),
           hide: true,
@@ -44,13 +35,7 @@ export class UsersComponent implements OnInit {
         {
           firstName: 'yugander',
           lastName: 'Aaleswara',
-          age: 24,
-
-          address: {
-            street: '102 katchur main road',
-            city: 'Chennai',
-            country: 'India',
-          },
+          email: 'Goabala@gmail.com',
           isActive: false,
           register: new Date('03/11/2020 06:20:00'),
           hide: true,
@@ -58,12 +43,7 @@ export class UsersComponent implements OnInit {
         {
           firstName: 'balaji',
           lastName: 'Aaleswara',
-          age: 50,
-          address: {
-            street: '102 katchur main road',
-            city: 'Chennai',
-            country: 'India',
-          },
+          email: 'Goa@gmail.com',
           isActive: true,
           register: new Date('03/11/2020 06:20:00'),
           hide: true,
@@ -72,13 +52,16 @@ export class UsersComponent implements OnInit {
       this.loaded = true;
     }, 3000);
   }
-  addUser() {
-    this.user.isActive = true;
-    (this.user.register = new Date('03/11/2020 06:20:00')),
-      this.users.unshift(this.user);
-  }
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(e);
+
+  onSubmit({ value, valid }: { value: User; valid: boolean }) {
+    if (!valid) {
+      console.log('Form is Invalid');
+    } else {
+      value.isActive = true;
+      value.register = new Date();
+      value.hide = true;
+      this.users.unshift(value);
+      this.form.reset();
+    }
   }
 }
