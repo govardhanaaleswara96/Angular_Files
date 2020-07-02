@@ -13,7 +13,7 @@
             <button (click)="addPost(title.value,body.value)" class="btn btn-primary btn-lg">Add Post</button>
         </div>
         <div *ngIf="isEdited" class="form-group text-center">
-            <button (click)="addPost(title.value,body.value)" class="btn btn-warning btn-lg">Update Post</button>
+            <button (click)="updatePost()" class="btn btn-warning btn-lg">Update Post</button>
         </div>
     </form>
 </div>

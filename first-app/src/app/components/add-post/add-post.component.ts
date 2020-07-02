@@ -9,8 +9,9 @@ import { PostService } from 'src/app/services/post.service';
 export class AddPostComponent implements OnInit {
   post: Post;
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
+  @Output() editedPost: EventEmitter<Post> = new EventEmitter();
   @Input() currentPost: Post;
-  @Input() isEdited: Post;
+  @Input() isEdited: boolean;
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {}
@@ -26,5 +27,12 @@ export class AddPostComponent implements OnInit {
         console.log('Post Add Failed');
       }
     }
+  }
+  async updatePost() {
+    //console.log(this.currentPost.id);
+    const editPost = await this.postService.updatedPost(this.currentPost);
+    //  console.log(editPost);
+    this.editedPost.emit(editPost);
+    this.isEdited = false;
   }
 }

@@ -1,4 +1,5 @@
-<app-add-post [currentPost]="currentPost" [isEdited]="isEdited" (newPost)="newPost($event)"></app-add-post>
+<app-add-post [currentPost]="currentPost" [isEdited]="isEdited" (editedPost)="editedPost($event)"
+    (newPost)="newPost($event)"></app-add-post>
 <div class="container">
     <div *ngFor="let post of posts" class="card  mb-2">
         <div class="card-header">
@@ -8,7 +9,7 @@
             <p>{{post.body}}</p>
         </div>
         <div class="card-footer">
-            <button class="btn btn-danger m-2">
+            <button class="btn btn-danger m-2" (click)="removePost(post)">
                 <i class="fa fa-remove"></i>
             </button>
             <button (click)="editPost(post)" class="btn btn-success m-2">
